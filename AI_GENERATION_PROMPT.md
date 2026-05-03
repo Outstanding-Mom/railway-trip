@@ -450,42 +450,8 @@ Both show max 8 results, display station name + province, click to select.
 
 Changing origin or travel plan clears frontend caches (`trainCacheRef.current.clear()`).
 
-## 11. Build & Deploy
 
-### Local Development
-
-```bash
-# Terminal 1: Backend
-cd api && npm install && npm run dev    # tsx watch → port 3001
-
-# Terminal 2: Frontend
-npm install && npm run dev              # Vite → port 5173, proxy /api → localhost:3002
-```
-
-Note: `vite.config.ts` proxies to `:3002` but backend defaults to `:3001`. Set `PORT=3002` for backend, or update proxy target.
-
-### Production Build
-
-```bash
-# Frontend
-npm run build    # outputs to dist/
-
-# Copy dist/ to api/public/ for SPA serving
-cp -r dist/* api/public/
-
-# Backend
-cd api && npm start
-```
-
-### Fly.io Deployment
-
-```bash
-cd api && fly deploy
-```
-
-Dockerfile builds both frontend and backend. `fly.toml` configures port and health check.
-
-## 12. Key Algorithms
+## 11. Key Algorithms
 
 ### Haversine Distance
 
@@ -514,7 +480,7 @@ Raw trains from API
   → filterTrains(trains, 'available')  // optional: has any seat > 0
 ```
 
-## 13. Mobile Considerations
+## 12. Mobile Considerations
 
 - ControlBar: `width: calc(100vw - 24px)`, max 520px
 - TrainListPanel: 400px fixed (overlaps map on mobile — acceptable for MVP)
@@ -523,7 +489,7 @@ Raw trains from API
   - Android: `intent://www.12306.cn/#Intent;scheme=https;package=com.MobileTicket;...;end`
 - Touch: all interactive elements have adequate tap targets
 
-## 14. Known Limitations & Future Enhancements
+## 13. Known Limitations & Future Enhancements
 
 - **12306 throttle**: 1.5s/request → 30 cities ≈ 90s scan time. Could test 1s with exponential backoff.
 - **No persistent storage**: all cache is in-memory, resets on restart.
